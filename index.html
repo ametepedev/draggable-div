@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAGGABLE DIV</title>
+    <!--FONTAWESOME LINK-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dragBox">
+        <div class="dragHeader">
+            Draggable Div
+        </div>
+        <div class="dragBody">
+            <i class="fa fa-up-down-left-right"></i>
+        </div>
+    </div>
+    <script>
+        const dragBox = document.querySelector('.dragBox');
+        const dragHeader = document.querySelector('.dragHeader');
+
+        function onDrag(e) {
+            let getStyle = window.getComputedStyle(dragBox);
+            let left = parseInt(getStyle.left);
+            let top = parseInt(getStyle.top);
+            dragBox.style.left = `${left + e.movementX}px`;
+            dragBox.style.top = `${top + e.movementY}px`;
+        }
+
+        dragHeader.addEventListener("mousedown", ()=>{
+            dragHeader.classList.add('active');
+            dragHeader.addEventListener("mousemove", onDrag);
+        });
+
+        dragHeader.addEventListener("mouseup", ()=>{
+            dragHeader.classList.remove('active');
+            dragHeader.removeEventListener("mousemove", onDrag);
+        });
+    </script>
+</body>
+</html>
